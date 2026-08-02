@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FutureTech Realm</title>
+    <link rel="stylesheet" href="style1.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-navbar">
+        <div class="navbar-container">
+            <div class="nav-brand">
+                <span class="logo-text">FutureTech Realm</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About us</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Form Section -->
+    <div class="signup-wrapper">
+        <div class="signup-card">
+            
+            <div class="signup-header">
+                <h2>Create Your Account</h2>
+                <p>Join FutureTech Realm to get access to latest tech articles & developer tools.</p>
+            </div>
+
+            <form id="signupForm">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="firstName">First Name</label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-field">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" placeholder="example@mail.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="Create password" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Account</button>
+
+                <p class="login-redirect">Already have an account? <a href="login.html">Log In</a></p>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP OVERLAY -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Account Successfully Created!</h3>
+            <p>Welcome to <b>FutureTech Realm</b>. Please log in to continue.</p>
+            <button class="modal-btn" id="continueBtn">Go to Login Page</button>
+        </div>
+    </div>
+
+    <script>
+        const signupForm = document.getElementById('signupForm');
+        const successModal = document.getElementById('successModal');
+        const continueBtn = document.getElementById('continueBtn');
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const pass = document.getElementById('password').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+
+            // 1. Existing Registered Email check karna
+            const existingEmail = localStorage.getItem('registeredEmail');
+            if (existingEmail && existingEmail === email) {
+                alert("This email is already registered! Please use another email or Log In.");
+                return;
+            }
+
+            // 2. Passwords Match Check
+            if (pass !== confirmPass) {
+                alert("Password aur Confirm Password match nahi ho rahe!");
+                return;
+            }
+
+            // 3. New User Credentials save karna
+            localStorage.setItem('registeredEmail', email);
+            localStorage.setItem('registeredPassword', pass);
+
+            // 4. Success Modal Show karna
+            successModal.classList.add('show');
+
+            // 5. Auto Redirect to LOGIN page after 2.5 seconds
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2500);
+        });
+
+        // 6. Instant Manual Redirect to LOGIN Page via Button Click
+        continueBtn.addEventListener('click', () => {
+            window.location.href = 'login.html'; 
+        });
+    </script>
+</body>
+</html>

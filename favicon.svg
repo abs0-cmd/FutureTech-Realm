@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Cyan to Purple Gradient for Futuristic Vibe -->
+    <linearGradient id="ftrGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#712cf9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Dark Background Container -->
+  <rect width="512" height="512" rx="120" fill="#0f172a"/>
+  
+  <!-- Stylized FutureTech Realm 'F' Icon -->
+  <path d="M140 120 H360 C380 120, 390 135, 380 155 L360 190 C355 200, 340 205, 320 205 H220 V250 H320 C340 250, 350 265, 340 285 L320 320 C315 330, 300 335, 280 335 H220 V392 C220 405, 205 415, 190 415 H150 C135 415, 125 405, 125 392 V135 C125 125, 130 120, 140 120 Z" fill="url(#ftrGradient)" />
+  
+  <!-- Tech Core Glowing Dot -->
+  <circle cx="360" cy="310" r="28" fill="#00f2fe"/>
+</svg>

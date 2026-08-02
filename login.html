@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - FutureTech Realm</title>
+    <link rel="stylesheet" href="login.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-navbar">
+        <div class="navbar-container">
+            <div class="nav-brand">
+                <span class="logo-text">FutureTech Realm</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About us</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="signup.html" class="nav-link">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Form Section -->
+    <div class="login-wrapper">
+        <div class="login-card">
+            
+            <div class="login-header">
+                <h2>Welcome Back!</h2>
+                <p>Please enter your details to sign in to your account.</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-field">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" placeholder="example@mail.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="label-row">
+                        <label for="password">Password</label>
+                        <a href="#" class="forgot-pass">Forgot password?</a>
+                    </div>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Log In</button>
+
+                <p class="signup-redirect">Don't have an account? <a href="index1.html">Sign Up</a></p>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP OVERLAY -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-card">
+            <div class="modal-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Login Successful!</h3>
+            <p>Welcome back to <b>FutureTech Realm</b>.</p>
+            <button class="modal-btn" id="continueBtn">Go to Home Page</button>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const successModal = document.getElementById('successModal');
+        const continueBtn = document.getElementById('continueBtn');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const enteredEmail = document.getElementById('email').value.trim().toLowerCase();
+            const enteredPassword = document.getElementById('password').value;
+
+            // Saved Credentials fetch karna
+            const savedEmail = localStorage.getItem('registeredEmail');
+            const savedPassword = localStorage.getItem('registeredPassword');
+
+            // 1. Agar account Sign up nahi hua
+            if (!savedEmail || !savedPassword) {
+                alert("Koi registered account nahi mila! Pehle Sign Up karein.");
+                return;
+            }
+
+            // 2. Email aur Password validation check
+            if (enteredEmail === savedEmail && enteredPassword === savedPassword) {
+                // Correct details: Status & Current Timestamp save karna
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('loginTime', Date.now());
+
+                // Success Popup Show Karna
+                successModal.classList.add('show');
+
+                // Auto Redirect after 2.5 seconds
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2500);
+            } else {
+                // Incorrect Credentials Alert
+                alert("Galat Email ya Password! Please dobara check karke try karein.");
+            }
+        });
+
+        // Instant Manual Redirect via Button Click
+        continueBtn.addEventListener('click', () => {
+            window.location.href = 'index.html'; 
+        });
+    </script>
+</body>
+</html>
